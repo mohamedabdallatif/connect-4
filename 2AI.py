@@ -1,26 +1,9 @@
-import random
-import pygame
-import math
-import numpy as np
+from init_game import *
 
-BLUE = (0, 0, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-YELLOW = (255, 255, 0)
-ROW_COUNT = 6
-COLUMN_COUNT = 7
-EMPTY = 0
 AI_Min = 0
 AI_Max = 1
 AI_Min_PIECE = 1
 AI_Max_PIECE = 2
-WINDOW_LENGTH = 4
-game_over = False
-SQUARESIZE = 100
-width = COLUMN_COUNT * SQUARESIZE
-height = (ROW_COUNT + 1) * SQUARESIZE
-size = (width, height)
-RADIUS = int(SQUARESIZE / 2 - 5)
 
 def drop_piece(board, row, col, piece):
 	board[row][col] = piece
@@ -174,10 +157,6 @@ def draw_board(board):
 	pygame.display.update()
 
 if __name__ == "__main__":
-    pygame.init()
-    board = np.zeros((ROW_COUNT,COLUMN_COUNT))
-    screen = pygame.display.set_mode(size)
-    myfont = pygame.font.SysFont("monospace", 75)
 
     draw_board(board)
     turn = random.randint(AI_Min, AI_Max)
