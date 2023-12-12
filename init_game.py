@@ -16,6 +16,7 @@ height = (ROW_COUNT+1) * SQUARESIZE
 size = (width, height)
 RADIUS = int(SQUARESIZE/2 - 5)
 game_over = False
+WINDOW_LENGTH = 4
 
 pygame.init()
 board = np.zeros((ROW_COUNT,COLUMN_COUNT))
