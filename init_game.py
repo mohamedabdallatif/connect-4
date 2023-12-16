@@ -1,6 +1,4 @@
-import random
 import pygame
-import math
 import numpy as np
 
 BLUE = (0,0,255)

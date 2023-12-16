@@ -1,3 +1,5 @@
+import math
+import random
 from init_game import *
 
 AI_Min = 0
@@ -72,26 +74,26 @@ def score_position(board, piece):
 	## Score Horizontal
 	for r in range(ROW_COUNT):
 		row_array = [int(i) for i in list(board[r,:])]
-		for c in range(COLUMN_COUNT-3):
-			window = row_array[c:c+WINDOW_LENGTH]
+		for c in range(COLUMN_COUNT - 3):
+			window = row_array[c : c + WINDOW_LENGTH]
 			score += eval_fun(window, piece)
 
 	## Score Vertical
 	for c in range(COLUMN_COUNT):
 		col_array = [int(i) for i in list(board[:,c])]
-		for r in range(ROW_COUNT-3):
-			window = col_array[r:r+WINDOW_LENGTH]
+		for r in range(ROW_COUNT - 3):
+			window = col_array[r : r + WINDOW_LENGTH]
 			score += eval_fun(window, piece)
 
 	## Score posiive sloped diagonal
-	for r in range(ROW_COUNT-3):
+	for r in range(ROW_COUNT - 3):
 		for c in range(COLUMN_COUNT-3):
-			window = [board[r+i][c+i] for i in range(WINDOW_LENGTH)]
+			window = [board[r + i][c + i] for i in range(WINDOW_LENGTH)]
 			score += eval_fun(window, piece)
 
-	for r in range(ROW_COUNT-3):
+	for r in range(ROW_COUNT - 3):
 		for c in range(COLUMN_COUNT-3):
-			window = [board[r+3-i][c+i] for i in range(WINDOW_LENGTH)]
+			window = [board[r - i + 3][c + i] for i in range(WINDOW_LENGTH)]
 			score += eval_fun(window, piece)
 
 	return score
@@ -156,16 +158,12 @@ def draw_board(board):
 				pygame.draw.circle(screen, YELLOW, (int(c*SQUARESIZE+SQUARESIZE/2), height-int(r*SQUARESIZE+SQUARESIZE/2)), RADIUS)
 	pygame.display.update()
 
-if __name__ == "__main__":
-
+def play_AI_vs_AI(depth):
     draw_board(board)
     turn = random.randint(AI_Min, AI_Max)
-    Min_Depth = random.randint(1, 8)
-    Max_Depth = random.randint(1, 8)
-    print(f"Max Depth = {Max_Depth} , Min Depth = {Min_Depth}")
     while not game_over:
         if turn == AI_Max:
-            col, minimax_score = minimax(board, Max_Depth, -math.inf, math.inf, AI_Max)
+            col, _ = minimax(board, depth, -math.inf, math.inf, AI_Max)
             if is_valid_location(board, col):
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, AI_Max_PIECE)
@@ -175,7 +173,7 @@ if __name__ == "__main__":
                     screen.blit(label, (40,10))
                     game_over = True
         elif turn == AI_Min and not game_over:			
-            col, minimax_score = minimax(board, Min_Depth, -math.inf, math.inf, AI_Min)
+            col, _ = minimax(board, depth, -math.inf, math.inf, AI_Min)
             if is_valid_location(board, col):
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, AI_Min_PIECE)

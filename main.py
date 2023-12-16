@@ -1,9 +1,9 @@
-from board import *
-import matplotlib.pyplot as plt
-import pygame
 import sys
 import math
+import pygame
+from board import *
 from AI_algorithms import *
+import matplotlib.pyplot as plt
 
 BLUE = (0, 0, 255)
 BLACK = (0, 0, 0)

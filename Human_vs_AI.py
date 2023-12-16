@@ -1,3 +1,5 @@
+import math
+import random
 from init_game import *
 
 PLAYER = 0
@@ -156,7 +158,7 @@ def draw_board(board):
 				pygame.draw.circle(screen, YELLOW, (int(c*SQUARESIZE+SQUARESIZE/2), height-int(r*SQUARESIZE+SQUARESIZE/2)), RADIUS)
 	pygame.display.update()
 
-if __name__ == "__main__":
+def play_AI_vs_Human(depth):
 	draw_board(board)
 	turn = random.randint(PLAYER, AI)
 	while not game_over:
@@ -183,7 +185,7 @@ if __name__ == "__main__":
 						turn = (turn + 1) % 2
 			draw_board(board)
 		if turn == AI and not game_over:			
-			col, minimax_score = minimax(board, 5, -math.inf, math.inf, True)
+			col, minimax_score = minimax(board, depth, -math.inf, math.inf, True)
 			if is_valid_location(board, col):
 				row = get_next_open_row(board, col)
 				drop_piece(board, row, col, AI_PIECE)
