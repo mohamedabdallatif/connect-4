@@ -102,6 +102,7 @@ def play_AI_vs_Human(depth):
 		return winning_move(board, PLAYER_PIECE) or winning_move(board, AI_PIECE) or len(get_valid_locations(board)) == 0
 
 	def minimax(board, depth, alpha, beta, maxMove):
+		global with_alpha_beta
 		valid_locations = get_valid_locations(board)
 		is_terminal = terminal_test(board)
 		if depth == 0 or is_terminal:
