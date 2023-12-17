@@ -1,4 +1,3 @@
-import pygame
 import numpy as np
 
 # Game Colors
@@ -25,5 +24,5 @@ height = (ROW_COUNT+1) * SQUARESIZE
 size = (width, height + 20)
 
 # Game Logic Variables
-depth = '1'
+input_depth = '1'
 with_alpha_beta = False

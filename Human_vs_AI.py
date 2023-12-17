@@ -6,7 +6,7 @@ AI = 1
 PLAYER_PIECE = 1
 AI_PIECE = 2
 
-def play_AI_vs_Human():
+def play_AI_vs_Human(depth):
 	def drop_piece(board, row, col, piece):
 		board[row][col] = piece
 
@@ -193,7 +193,7 @@ def play_AI_vs_Human():
 						turn = (turn + 1) % 2
 			
 		if turn == AI and not game_over:			
-			col, _ = minimax(board, int(depth), -math.inf, math.inf, True)
+			col, _ = minimax(board, depth, -math.inf, math.inf, True)
 			if is_valid_location(board, col):
 				row = get_next_open_row(board, col)
 				drop_piece(board, row, col, AI_PIECE)

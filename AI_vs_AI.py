@@ -8,7 +8,7 @@ AI_Max_PIECE = 2
 
 
 
-def play_AI_vs_AI():
+def play_AI_vs_AI(depth):
     def drop_piece(board, row, col, piece):
         board[row][col] = piece
     
@@ -169,7 +169,7 @@ def play_AI_vs_AI():
     turn = random.randint(AI_Min, AI_Max)
     while not game_over:
         if turn == AI_Max:
-            col, _ = minimax(board, int(depth), -math.inf, math.inf, AI_Max)
+            col, _ = minimax(board, depth, -math.inf, math.inf, AI_Max)
             if is_valid_location(board, col):
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, AI_Max_PIECE)
@@ -179,7 +179,7 @@ def play_AI_vs_AI():
                     screen.blit(label, (40,10))
                     game_over = True
         elif turn == AI_Min and not game_over:			
-            col, _ = minimax(board, int(depth), -math.inf, math.inf, AI_Min)
+            col, _ = minimax(board, depth, -math.inf, math.inf, AI_Min)
             if is_valid_location(board, col):
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, AI_Min_PIECE)

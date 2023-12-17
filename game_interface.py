@@ -25,8 +25,6 @@ def button(msg, x, y, w, h, ic, ac, action=None):
     if x + w > mouse[0] > x and y + h > mouse[1] > y:
         pygame.draw.rect(intro_screen, ac, (x, y, w, h))
         if click[0] == 1 and action != None:
-            if msg == "START(P)":
-                with_alpha_beta = True
             action()
     else:
         pygame.draw.rect(intro_screen, ic, (x, y, w, h))
@@ -39,13 +37,23 @@ def text_objects(text, font):
     return textsurface, textsurface.get_rect()
 
 def set_alpha_beta_option(val):
+    global alpha_beta_option
     with_alpha_beta = val
 
 def set_game_mode(mode):
     global game_mode
     game_mode = mode
 
-if __name__ == '__main__':
+def play_game():
+    global game_mode
+    global input_depth
+    if game_mode == None:
+        pass
+    print(input_depth)
+    game_mode(int(input_depth))
+
+def main():    
+    global input_depth, active, intro, color, color_active, color_passive
     depth_input_field = pygame.Rect((width / 2 - 30, 550, 50, 45))
     while intro:
         for event in pygame.event.get():
@@ -56,9 +64,9 @@ if __name__ == '__main__':
             if event.type == pygame.KEYDOWN:
                 if active:
                     if event.key == pygame.K_BACKSPACE:
-                        depth = depth[: -1]
+                        input_depth = input_depth[: -1]
                     else:
-                        depth += event.unicode
+                        input_depth += event.unicode
         color = color_active if active else color_passive
         intro_screen.fill(SCREEN_BACKGROUND)
         # Connect 4 Large Text
@@ -91,10 +99,12 @@ if __name__ == '__main__':
         
         # Draw Depth Input Field
         pygame.draw.rect(intro_screen, color, depth_input_field, 2)
-        text_surface = mediumText.render(depth, True, BLACK)
+        text_surface = mediumText.render(input_depth, True, BLACK)
         intro_screen.blit(text_surface, (depth_input_field.x + 5, depth_input_field.y + 5))
         depth_input_field.w = max(30, text_surface.get_width() + 10)
 
         # Play Button
-        button("Play", 250, 620, 200, 50, TEAL, BRIGHT_TEAL, game_mode)
+        button("Play", 250, 620, 200, 50, TEAL, BRIGHT_TEAL, play_game)
         pygame.display.update()
+
+main()
