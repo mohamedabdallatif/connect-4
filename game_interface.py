@@ -45,11 +45,11 @@ def set_game_mode(mode):
     game_mode = mode
 
 def play_game():
-    global game_mode
+    global game_mode, intro
     global input_depth
     if game_mode == None:
         pass
-    print(input_depth)
+    intro = False
     game_mode(int(input_depth))
 
 def main():    
