@@ -1,5 +1,3 @@
-import numpy as np
-
 # Game Colors
 BLUE = (0,0,255)
 BLACK = (0,0,0)
@@ -25,4 +23,4 @@ size = (width, height + 20)
 
 # Game Logic Variables
 input_depth = '1'
-with_alpha_beta = False
+with_alpha_beta = None

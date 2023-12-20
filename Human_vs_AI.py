@@ -1,3 +1,4 @@
+import numpy  as np
 import math, random, pygame
 from init_game import *
 
@@ -127,7 +128,7 @@ def play_AI_vs_Human(depth):
 					value = new_score
 					column = col
 				alpha = max(alpha, value)
-				if alpha >= beta:
+				if with_alpha_beta and alpha >= beta:
 					break
 		else:
 			value = math.inf
@@ -141,7 +142,7 @@ def play_AI_vs_Human(depth):
 					value = new_score
 					column = col
 				beta = min(beta, value)
-				if alpha >= beta:
+				if with_alpha_beta and alpha >= beta:
 					break
 		return column, value
 

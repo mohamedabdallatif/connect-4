@@ -1,3 +1,4 @@
+import numpy  as np
 import math, random, pygame
 from init_game import *
 
@@ -175,7 +176,7 @@ def play_AI_vs_AI(depth):
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, AI_Max_PIECE)
                 if winning_move(board, AI_Max_PIECE):
-                    label = myfont.render("Max wins!!", 1, RED)
+                    label = myfont.render("Max wins!!", 1, YELLOW)
                     print('MAX wins!!')
                     screen.blit(label, (40,10))
                     game_over = True
@@ -185,7 +186,7 @@ def play_AI_vs_AI(depth):
                 row = get_next_open_row(board, col)
                 drop_piece(board, row, col, AI_Min_PIECE)
                 if winning_move(board, AI_Min_PIECE):
-                    label = myfont.render("MIN wins!!", 1, YELLOW)
+                    label = myfont.render("MIN wins!!", 1, RED)
                     print('MIN wins!!')
                     screen.blit(label, (40,10))
                     game_over = True

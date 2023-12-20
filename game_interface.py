@@ -17,17 +17,37 @@ smallText = pygame.font.SysFont("monospace", 25)
 mediumText = pygame.font.SysFont("monospace", 35)
 largeText = pygame.font.SysFont("monospace", 110)
 
-def button(msg, x, y, w, h, ic, ac, action=None):
+def button(msg, x, y, w, h, c1, c2, action=None):
     global with_alpha_beta
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
 
     if x + w > mouse[0] > x and y + h > mouse[1] > y:
-        pygame.draw.rect(intro_screen, ac, (x, y, w, h))
+        pygame.draw.rect(intro_screen, c2, (x, y, w, h))
         if click[0] == 1 and action != None:
             action()
+    elif msg == 'AI VS AI':
+            if game_mode == play_AI_vs_AI:
+                pygame.draw.rect(intro_screen, BRIGHT_TEAL, (x, y, w, h))
+            else:
+                pygame.draw.rect(intro_screen, c1, (x, y, w, h))
+    elif msg == 'Human VS AI':
+            if game_mode == play_AI_vs_Human:
+                pygame.draw.rect(intro_screen, BRIGHT_TEAL, (x, y, w, h))
+            else:
+                pygame.draw.rect(intro_screen, c1, (x, y, w, h))
+    elif msg == 'YES':
+            if with_alpha_beta == True:
+                pygame.draw.rect(intro_screen, BRIGHT_TEAL, (x, y, w, h))
+            else:
+                pygame.draw.rect(intro_screen, c1, (x, y, w, h))
+    elif msg == 'NO':
+            if with_alpha_beta == False:
+                pygame.draw.rect(intro_screen, BRIGHT_TEAL, (x, y, w, h))
+            else:
+                pygame.draw.rect(intro_screen, c1, (x, y, w, h))
     else:
-        pygame.draw.rect(intro_screen, ic, (x, y, w, h))
+        pygame.draw.rect(intro_screen, c1, (x, y, w, h))
     textSurf, textRect = text_objects(msg, smallText)
     textRect.center = ((x + (w / 2)), (y + (h / 2)))
     intro_screen.blit(textSurf, textRect)
@@ -36,9 +56,9 @@ def text_objects(text, font):
     textsurface = font.render(text, True, BLACK)
     return textsurface, textsurface.get_rect()
 
-def set_alpha_beta_option(val):
-    global alpha_beta_option
-    with_alpha_beta = val
+def set_alpha_beta_option(isEnabled):
+    global with_alpha_beta
+    with_alpha_beta = isEnabled
 
 def set_game_mode(mode):
     global game_mode
@@ -47,7 +67,7 @@ def set_game_mode(mode):
 def play_game():
     global game_mode, intro
     global input_depth
-    if game_mode == None:
+    if game_mode == None or with_alpha_beta == None:
         pass
     intro = False
     game_mode(int(input_depth))
