@@ -1,1 +1,1 @@
-Connect 4 Game using MinMax Algorith with Alpha & Beta Pruning
+Connect 4 Game using MinMax Algorithm with Alpha & Beta Pruning
